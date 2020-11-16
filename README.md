@@ -17,9 +17,22 @@ Running a PowerShell script as a sheduled task.<br>
 `powershell.exe -ExecutionPolicy Bypass -File C:\Install\Script.ps1 -WindowStyle Hidden`<br>
 (Where `C:\Install\Script.ps1` is the script you wish to run, and -WindowStyle Hidden can be use to hide the window.)
 
-Useful powershell commands for Office 365<br>
-How to ensure that non-AD synced accounts do not prompt for password change<br>
+Connect to 365 powershell services.
+`$domainHost="Company Part of company.onmicrosoft.com Here!!!!"
+$credential = Get-Credential
+Connect-MsolService -Credential $credential
+Import-Module Microsoft.Online.SharePoint.PowerShell -DisableNameChecking
+Connect-SPOService -Url https://$domainHost-admin.sharepoint.com -credential $credential
+Import-Module SkypeOnlineConnector
+$sfboSession = New-CsOnlineSession -Credential $credential
+Import-PSSession $sfboSession
+$exchangeSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $credential -Authentication "Basic" -AllowRedirection
+Import-PSSession $exchangeSession
+$SccSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $credential -Authentication "Basic" -AllowRedirection
+Import-PSSession $SccSession -Prefix cc`
+
+Ensure that non-AD synced account does not prompt for password change<br>
 `Set-MsolUser -UserPrincipalName user@comapny.onmicrosoft.com -PasswordNeverExpires $true`
 
-How to change login credentials after renaming AD account<br>
+Change login credentials after renaming AD account<br>
 `Set-MsolUserPrincipalName -UserPrincipalName olduser@company.onmicrosoft.com -NewUserPrincipalName newuser@domain.com`
