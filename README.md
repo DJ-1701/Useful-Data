@@ -17,7 +17,7 @@ Running a PowerShell script as a sheduled task.<br>
 `powershell.exe -ExecutionPolicy Bypass -File C:\Install\Script.ps1 -WindowStyle Hidden`<br>
 (Where `C:\Install\Script.ps1` is the script you wish to run, and -WindowStyle Hidden can be use to hide the window.)
 
-Connect to 365 powershell services.
+Connect to 365 powershell services.<br>
 `$domainHost="Company Part of company.onmicrosoft.com Here!!!!"
 $credential = Get-Credential
 Connect-MsolService -Credential $credential
