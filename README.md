@@ -16,3 +16,10 @@ https://devblogs.microsoft.com/scripting/learn-how-to-save-powershell-objects-fo
 Running a PowerShell script as a sheduled task.<br>
 `powershell.exe -ExecutionPolicy Bypass -File C:\Install\Script.ps1 -WindowStyle Hidden`<br>
 (Where `C:\Install\Script.ps1` is the script you wish to run, and -WindowStyle Hidden can be use to hide the window.)
+
+Useful powershell commands for Office 365<br>
+How to ensure that non-AD synced accounts do not prompt for password change<br>
+`Set-MsolUser -UserPrincipalName user@comapny.onmicrosoft.com -PasswordNeverExpires $true`
+
+How to change login credentials after renaming AD account<br>
+`Set-MsolUserPrincipalName -UserPrincipalName olduser@company.onmicrosoft.com -NewUserPrincipalName newuser@domain.com`
